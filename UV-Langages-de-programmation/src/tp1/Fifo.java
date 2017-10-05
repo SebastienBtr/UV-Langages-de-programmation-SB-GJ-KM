@@ -1,29 +1,61 @@
 package tp1;
 
-public class Fifo<E> implements Lane<E> {
+public class Fifo implements Lane<Element> {
 
-	@Override
-	public void pushElem(E e) {
-		// TODO Auto-generated method stub
-		
+	private Element first;
+	private Element last;
+
+	public Fifo(){
+		this.first = null;
+		this.last = null;
 	}
 
 	@Override
-	public E popElem() {
-		// TODO Auto-generated method stub
-		return null;
+	public void pushElem(Element e) {
+		if(this.isEmpty()) {
+			this.first = e;
+			this.last = e;
+		}
+		else {
+			Element tmp = this.last;
+			this.last = e;
+			tmp.setNext(this.last);
+		}
+	}
+
+	@Override
+	public Element popElem() {
+		Element ret;
+		if(this.isEmpty()) ret = null;
+		else {
+			ret = this.first;
+			this.first = ret.getNext();
+		}
+
+		return ret;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ret = false;
+		if(this.first == null) ret = true;
+
+		return ret;
 	}
 
 	@Override
 	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		int ret = 0;
+		if(!this.isEmpty()){
+			Element current = this.first;
+			ret++;
+			while(current.getNext() != null){
+				current = current.getNext();
+				ret++;
+			}
+		}
+
+		return ret;
 	}
 
 }
