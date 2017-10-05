@@ -4,10 +4,12 @@ public class Fifo implements Lane<Element> {
 
 	private Element first;
 	private Element last;
+	private int length;
 
 	public Fifo(){
 		this.first = null;
 		this.last = null;
+		this.length = 0;
 	}
 
 	@Override
@@ -21,6 +23,7 @@ public class Fifo implements Lane<Element> {
 			this.last = e;
 			tmp.setNext(this.last);
 		}
+		this.length++;
 	}
 
 	@Override
@@ -30,6 +33,7 @@ public class Fifo implements Lane<Element> {
 		else {
 			ret = this.first;
 			this.first = ret.getNext();
+			this.length--;
 		}
 
 		return ret;
@@ -38,24 +42,14 @@ public class Fifo implements Lane<Element> {
 	@Override
 	public boolean isEmpty() {
 		boolean ret = false;
-		if(this.first == null) ret = true;
+		if(this.length == 0) ret = true;
 
 		return ret;
 	}
 
 	@Override
 	public int getLength() {
-		int ret = 0;
-		if(!this.isEmpty()){
-			Element current = this.first;
-			ret++;
-			while(current.getNext() != null){
-				current = current.getNext();
-				ret++;
-			}
-		}
-
-		return ret;
+		return this.length;
 	}
 
 }
