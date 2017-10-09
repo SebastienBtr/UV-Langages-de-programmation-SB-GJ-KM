@@ -27,13 +27,15 @@ public class Fifo implements Lane<Element> {
 	}
 
 	@Override
-	public Element popElem() {
-		Element ret;
+	public Object popElem() {
+		Object ret;
 		if(this.isEmpty()) ret = null;
 		else {
-			ret = this.first;
-			this.first = ret.getNext();
+			Element tmp = this.first;
+			this.first = tmp.getNext();
 			this.length--;
+			ret = tmp.getValue();
+
 		}
 
 		return ret;
