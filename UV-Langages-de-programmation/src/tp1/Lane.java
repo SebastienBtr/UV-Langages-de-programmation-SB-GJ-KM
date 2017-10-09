@@ -11,7 +11,7 @@ public interface Lane<E> {
      * Remove an element of the lane
      * @return The element removed
      */
-    public E popElem();
+    public Object popElem();
     
     /**
      * Check if the lane is empty
