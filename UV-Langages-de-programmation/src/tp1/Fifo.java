@@ -54,4 +54,11 @@ public class Fifo implements Lane<Element> {
 		return this.length;
 	}
 
+	public Element getFirst() {
+		return first;
+	}
+
+	public Element getLast() {
+		return last;
+	}
 }
