@@ -1,9 +1,6 @@
-<<<<<<< HEAD:UV-Langages-de-programmation/src/tp/v1/Test.java
 package tp.v1;
 
-=======
-package tp1;
->>>>>>> bf47f2e671a7676eb49cd3dda2a097fbcb71b655:UV-Langages-de-programmation/src/tp1/Test.java
+
 public class Test {
 
 	public static void main(String[] args) {

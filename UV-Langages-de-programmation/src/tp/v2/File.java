@@ -31,8 +31,24 @@ public interface File<E> extends Iterable<E> {
 	}
 
 	default boolean estEgal(File<E> file){
-		// TODO
-		return true;
+		boolean ret = true;
+
+		if (this.taille() == file.taille()) {
+
+			while (!this.estVide() && ret) {
+				if(! this.premier().equals(file.premier())) {
+					ret = false;
+				}
+				else {
+					ret = this.suivants().estEgal(file.suivants());
+				}
+			}
+
+		}
+		else {
+			ret = false;
+		}
+		return ret;
 	}
 	
 	

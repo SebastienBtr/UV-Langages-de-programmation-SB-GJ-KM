@@ -9,9 +9,7 @@ public interface Liste<E> extends Iterable<E> {
 	default boolean casVide() {
 		return false;
 	}
-	default E tete() {
-		throw new UnsupportedOperationException();
-	}
+	default E tete() { throw new UnsupportedOperationException(); }
 	default Liste<E> reste() {
 		throw new UnsupportedOperationException();
 	}
@@ -62,10 +60,10 @@ public interface Liste<E> extends Iterable<E> {
 	}
 	
 	public static <E> Liste<E> cons(E t, Liste<E> r) {
+
 		return new Liste<E>() {
-			/*
-			 * Accesseurs
-			 */
+
+
 			public E tete() {
 				return t;
 			}
@@ -74,16 +72,16 @@ public interface Liste<E> extends Iterable<E> {
 				return true;
 			}
 			public int taille(){
-				return 0;
+				return 1 + this.reste().taille();
 			}
 			public boolean estVide(){
-				return this.taille() == 0;
+				return this.reste().taille() == 0;
 			}
 
 
 			public Iterator<E> iterator() {
 				return new IterateurListe<E>() {
-					Liste<E> list = cons(t, r);
+					Liste<E> list = Liste.cons(t, r);
 
 					public boolean hasNext() {
 						return !list.estVide();
@@ -95,7 +93,7 @@ public interface Liste<E> extends Iterable<E> {
 						}
 
 						Liste<E> tmp = list.reste();
-						this.list = cons(tmp.tete(), tmp.reste());
+						this.list = Liste.cons(tmp.tete(), tmp.reste());
 						return list.tete();
 					}
 				};
@@ -103,16 +101,17 @@ public interface Liste<E> extends Iterable<E> {
 
 			public Liste<E> miroir(){
 
-				Liste<E> inverted ;
+				Liste<E> inverted;
 				Iterator<E> itr = this.iterator();
 				E next = this.tete();
 
+				inverted = Liste.cons(next, Liste.vide());
 
 				while (itr.hasNext()) {
 					next = itr.next();
-				}
 
-				inverted = cons(next ,this.reste().miroir());
+					inverted = Liste.cons(next, inverted);
+				}
 
 				return inverted;
 			}

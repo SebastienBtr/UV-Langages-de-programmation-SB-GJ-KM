@@ -1,13 +1,10 @@
-<<<<<<< HEAD:UV-Langages-de-programmation/src/tp/v1/Fifo.java
 package tp.v1;
 
-=======
-package tp1;
+
 /**
  * Implement of a Lane for Fifo (mutable list)
  * @author K.Mer, G.Jacquet, S.Bouttier
  */
->>>>>>> bf47f2e671a7676eb49cd3dda2a097fbcb71b655:UV-Langages-de-programmation/src/tp1/Fifo.java
 public class Fifo implements Lane<Element> {
 	private Element first;
 	private Element last;
@@ -25,7 +22,6 @@ public class Fifo implements Lane<Element> {
 	 * Add an element at the end of the Lane
 	 * @param e - The new element to add
 	 */
-	@Override
 	public void pushElem(Element e) {
 		if(this.isEmpty()) {
 			this.first = e;
@@ -42,7 +38,6 @@ public class Fifo implements Lane<Element> {
 	 * Remove the first element of the Lane
 	 * @return the value of the element
 	 */
-	@Override
 	public Object popElem() {
 		Object ret;
 		if(this.isEmpty()) ret = null;
@@ -57,7 +52,6 @@ public class Fifo implements Lane<Element> {
 	/**
 	 * @return false is the lane is empty
 	 */
-	@Override
 	public boolean isEmpty() {
 		boolean ret = false;
 		if(this.length == 0) ret = true;
@@ -66,7 +60,6 @@ public class Fifo implements Lane<Element> {
 	/**
 	 * @return the length of the lane
 	 */
-	@Override
 	public int getLength() {
 		return this.length;
 	}
