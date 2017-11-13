@@ -1,4 +1,4 @@
-package tp1;
+package tp.v1;
 
 public class Element<E> {
 
