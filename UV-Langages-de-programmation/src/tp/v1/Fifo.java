@@ -1,17 +1,30 @@
+<<<<<<< HEAD:UV-Langages-de-programmation/src/tp/v1/Fifo.java
 package tp.v1;
 
+=======
+package tp1;
+/**
+ * Implement of a Lane for Fifo (mutable list)
+ * @author K.Mer, G.Jacquet, S.Bouttier
+ */
+>>>>>>> bf47f2e671a7676eb49cd3dda2a097fbcb71b655:UV-Langages-de-programmation/src/tp1/Fifo.java
 public class Fifo implements Lane<Element> {
-
 	private Element first;
 	private Element last;
 	private int length;
-
+	/**
+	 * Constructor of the class
+	 * Create an empty Lane (Set the first/last element to null)
+	 */
 	public Fifo(){
 		this.first = null;
 		this.last = null;
 		this.length = 0;
 	}
-
+	/**
+	 * Add an element at the end of the Lane
+	 * @param e - The new element to add
+	 */
 	@Override
 	public void pushElem(Element e) {
 		if(this.isEmpty()) {
@@ -25,7 +38,10 @@ public class Fifo implements Lane<Element> {
 		}
 		this.length++;
 	}
-
+	/**
+	 * Remove the first element of the Lane
+	 * @return the value of the element
+	 */
 	@Override
 	public Object popElem() {
 		Object ret;
@@ -35,29 +51,34 @@ public class Fifo implements Lane<Element> {
 			this.first = tmp.getNext();
 			this.length--;
 			ret = tmp.getValue();
-
 		}
-
 		return ret;
 	}
-
+	/**
+	 * @return false is the lane is empty
+	 */
 	@Override
 	public boolean isEmpty() {
 		boolean ret = false;
 		if(this.length == 0) ret = true;
-
 		return ret;
 	}
-
+	/**
+	 * @return the length of the lane
+	 */
 	@Override
 	public int getLength() {
 		return this.length;
 	}
-
+	/**
+	 * @return the first element of the lane
+	 */
 	public Element getFirst() {
 		return first;
 	}
-
+	/**
+	 * @return the last element of the lane
+	 */
 	public Element getLast() {
 		return last;
 	}
