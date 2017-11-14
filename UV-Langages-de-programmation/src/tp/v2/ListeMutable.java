@@ -10,11 +10,11 @@ public interface ListeMutable<E> extends Liste<E>{
 	default ListeMutable<E> reste() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	default void changerReste(ListeMutable<E> reste) {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	default void changerTete(E tete) {
 		throw new UnsupportedOperationException();
 	}
@@ -28,9 +28,42 @@ public interface ListeMutable<E> extends Liste<E>{
 
 	public static <E> ListeMutable<E> cons(E t, ListeMutable<E> r){
 
-
-
 		return new ListeMutable<E>() {
+
+			public E tete() {
+				return t;
+			}
+			public ListeMutable<E> reste() { return r; }
+			public boolean casCons() {
+				return true;
+			}
+			public int taille(){
+				return 1 + this.reste().taille();
+			}
+			public boolean estVide(){
+				return this.reste().taille() == 0;
+			}
+
+
+			public Iterator<E> iterator() {
+				return new IterateurListe<E>() {
+					ListeMutable<E> list = ListeMutable.cons(t, r);
+
+					public boolean hasNext() {
+						return !list.estVide();
+					}
+
+					public E next() {
+						if (!hasNext()) {
+							throw new UnsupportedOperationException();
+						}
+
+						ListeMutable<E> tmp = list.reste();
+						this.list = ListeMutable.cons(tmp.tete(), tmp.reste());
+						return list.tete();
+					}
+				};
+			}
 
 			public void changerReste(ListeMutable<E> reste) {
 				ListeMutable<E> refReste = r;
@@ -58,12 +91,11 @@ public interface ListeMutable<E> extends Liste<E>{
 					inverted = ListeMutable.cons(next, inverted);
 				}
 
-
 				return inverted;
 			}
 		};
 	}
-	
+
 	public static <E> ListeMutable<E> vide() {
 		return new ListeMutable<E>() {
 			public void changerReste(ListeMutable<E> reste) {
@@ -75,5 +107,5 @@ public interface ListeMutable<E> extends Liste<E>{
 			}
 		};
 	}
-	
+
 }

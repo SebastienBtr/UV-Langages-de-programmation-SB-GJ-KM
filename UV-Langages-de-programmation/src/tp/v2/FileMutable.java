@@ -7,9 +7,7 @@ public interface FileMutable<E> extends File<E> {
 	 */
 	@Override
 	default FileMutable<E> suivants(){
-
 		FileMutable<E> copy = this.creerCopie();
-
 		copy.retrait();
 
 		if (copy.estVide()) {
@@ -33,19 +31,23 @@ public interface FileMutable<E> extends File<E> {
 	 */
 	@Override
 	default FileMutable<E> ajout(E dernierDansFile) {
-		this.premier() =
+		this.ajouter(dernierDansFile);
+
 		return this;
 	}
 	@Override
 	default FileMutable<E> retrait() {
-		// TODO
+		this.retirer();
+
 		return this;
 	}
+
 	// Complexité O(|secondeFile|)
 	@Override
 	default FileMutable<E> ajout(File<E> secondeFile) {
-		// TODO (même code que FileImmutable.ajout)
-		return null;
+		this.ajouter(secondeFile);
+
+		return this;
 	}
 	
 	// Complexité en O(1).

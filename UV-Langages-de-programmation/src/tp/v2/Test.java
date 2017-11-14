@@ -17,8 +17,6 @@ public class Test {
 		ListeMutable<Integer> list3 = ListeMutable.cons(3,list2);
 		ListeMutable<Integer> list4 = ListeMutable.cons(4,list3);
 
-
-
 		System.out.println("---------TEST MUTABLE---------");
 		System.out.println(list4.tete());
 		System.out.println(list4.reste().tete());

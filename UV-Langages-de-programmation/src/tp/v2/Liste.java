@@ -40,6 +40,7 @@ public interface Liste<E> extends Iterable<E> {
 	 * Fabriques (statiques)
 	 */
 	public static <E> Liste<E> vide() {
+
 		return new Liste<E>() {
 
 			public boolean casVide() {
@@ -62,7 +63,6 @@ public interface Liste<E> extends Iterable<E> {
 	public static <E> Liste<E> cons(E t, Liste<E> r) {
 
 		return new Liste<E>() {
-
 
 			public E tete() {
 				return t;

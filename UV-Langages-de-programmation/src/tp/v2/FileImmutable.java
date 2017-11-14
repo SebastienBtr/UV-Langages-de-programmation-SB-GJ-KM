@@ -18,7 +18,6 @@ public interface FileImmutable<E> extends File<E> {
 	 */
 	@Override
 	default FileImmutable<E> ajout(E dernierDansFile) {
-		// TODO
 		return null;
 	}
 	@Override
