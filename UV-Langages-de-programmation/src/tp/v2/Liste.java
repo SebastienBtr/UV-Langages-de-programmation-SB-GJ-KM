@@ -6,19 +6,50 @@ public interface Liste<E> extends Iterable<E> {
 	/*
 	 * Accesseurs
 	 */
+
+    /**
+     * Vérifie si la liste est une liste vide
+     * @return true si la liste est une liste vide
+     */
 	default boolean casVide() {
 		return false;
 	}
+
+    /**
+     * Récupère l'élément en tête de liste
+     * @return l'élément de la tête de la liste
+     */
 	default E tete() { throw new UnsupportedOperationException(); }
+
+    /**
+     * Acceder au reste de la liste, c'est à dire la liste
+     * sans la tete
+     * @return une liste qui est le reste de la liste
+     */
 	default Liste<E> reste() {
 		throw new UnsupportedOperationException();
 	}
+
+    /**
+     * Vérifie si la liste est un liste créé (non liste vide)
+     * @return true si la liste est créé (non liste vide)
+     */
 	default boolean casCons() {
 		return false;
 	}
+
+    /**
+     * Acceder à la taille de la liste
+     * @return la taille de la liste
+     */
 	default public int taille(){
 		return 0;
 	}
+
+    /**
+     * Vérifie si la liste est vide
+     * @return true si la liste est vide
+     */
 	default public boolean estVide(){
 		return this.taille() == 0;
 	}
@@ -26,11 +57,20 @@ public interface Liste<E> extends Iterable<E> {
 	/*
 	 * Services
 	 */
+
+    /**
+     * Créé un iterateur
+     * @return l'iterateur créé
+     */
 	default Iterator<E> iterator() {
 
-		return new IterateurListe<>(); // Compléter puis utiliser IterateurListe.
+		return new IterateurListe<>();
 	}
 
+    /**
+     * Inverse la liste
+     * @return la nouvelle liste inversé
+     */
 	default Liste<E> miroir(){
 
 		return null;
@@ -39,6 +79,12 @@ public interface Liste<E> extends Iterable<E> {
 	/*
 	 * Fabriques (statiques)
 	 */
+
+    /**
+     * Créé une liste vide
+     * @param <E> le type d'élément de la liste
+     * @return la liste vide créé
+     */
 	public static <E> Liste<E> vide() {
 
 		return new Liste<E>() {
@@ -59,7 +105,14 @@ public interface Liste<E> extends Iterable<E> {
 
 		};
 	}
-	
+
+    /**
+     * Créé un liste non vide
+     * @param t l'élément en tête de liste
+     * @param r une liste représentant le reste de la liste
+     * @param <E> le type d'élément de la liste
+     * @return la liste non vide
+     */
 	public static <E> Liste<E> cons(E t, Liste<E> r) {
 
 		return new Liste<E>() {

@@ -7,26 +7,52 @@ public interface ListeMutable<E> extends Liste<E>{
 	/*
 	 * Accesseurs.
 	 */
-	default ListeMutable<E> reste() {
-		throw new UnsupportedOperationException();
-	}
 
-	default void changerReste(ListeMutable<E> reste) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Acceder au reste de la liste, c'est à dire la liste
+     * sans la tete
+     * @return une liste qui est le reste de la liste
+     */
+    default ListeMutable<E> reste() {
+        throw new UnsupportedOperationException();
+    }
 
-	default void changerTete(E tete) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     * Remplace le reste de la liste
+     * @param reste le nouveau reste de la liste
+     */
+    default void changerReste(ListeMutable<E> reste) {
+        throw new UnsupportedOperationException();
+    }
 
-	/*
+    /**
+     * Remplace la tete de la liste
+     * @param tete la nouvelle tete de la liste
+     */
+    default void changerTete(E tete) {
+        throw new UnsupportedOperationException();
+    }
+
+    /*
 	 * Services
 	 */
-	default ListeMutable<E> miroir(){
-		return null;
-	}
 
-	public static <E> ListeMutable<E> cons(E t, ListeMutable<E> r){
+    /**
+     * Inverse la liste
+     * @return la nouvelle liste inversé
+     */
+    default ListeMutable<E> miroir(){
+        return null;
+    }
+
+    /**
+     * Créé un liste non vide
+     * @param t l'élément en tête de liste
+     * @param r une liste représentant le reste de la liste
+     * @param <E> le type d'élément de la liste
+     * @return la liste non vide
+     */
+    public static <E> ListeMutable<E> cons(E t, ListeMutable<E> r){
 
 		return new ListeMutable<E>() {
 
@@ -43,7 +69,6 @@ public interface ListeMutable<E> extends Liste<E>{
 			public boolean estVide(){
 				return this.reste().taille() == 0;
 			}
-
 
 			public Iterator<E> iterator() {
 				return new IterateurListe<E>() {
@@ -96,16 +121,13 @@ public interface ListeMutable<E> extends Liste<E>{
 		};
 	}
 
+    /**
+     * Créé une liste vide
+     * @param <E> le type d'élément de la liste
+     * @return la liste vide créé
+     */
 	public static <E> ListeMutable<E> vide() {
-		return new ListeMutable<E>() {
-			public void changerReste(ListeMutable<E> reste) {
-				throw new UnsupportedOperationException();
-			}
-
-			public void changerTete(E tete) {
-				throw new UnsupportedOperationException();
-			}
-		};
+		return new ListeMutable<E>() {};
 	}
 
 }
