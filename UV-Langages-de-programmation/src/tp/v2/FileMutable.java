@@ -45,9 +45,11 @@ public interface FileMutable<E> extends File<E> {
 	// Complexité O(|secondeFile|)
 	@Override
 	default FileMutable<E> ajout(File<E> secondeFile) {
-		this.ajouter(secondeFile);
-
-		return this;
+		FileMutable<E> r = this;
+		for(E e : secondeFile){
+			r = r.ajout(e);
+		}
+		return r;
 	}
 	
 	// Complexité en O(1).
