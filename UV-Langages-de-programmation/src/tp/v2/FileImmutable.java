@@ -12,6 +12,7 @@ public interface FileImmutable<E> extends File<E> {
 	 */
 	FileImmutable<E> creer();
 	FileImmutable<E> creer(E dernier);
+	FileImmutable<E> creer(FileImmutable<E> file, E dernier);
 	
 	/*
 	 * Services
@@ -19,7 +20,18 @@ public interface FileImmutable<E> extends File<E> {
 	@Override
 	default FileImmutable<E> ajout(E dernierDansFile) {
 
-		return this.creer(dernierDansFile);
+		if (estVide()) {
+			return creer(dernierDansFile);
+		}
+
+		FileImmutable<E> ret = creer(this.premier());
+		FileImmutable<E> tmp = this.suivants();
+		while (!tmp.estVide()) {
+			ret = creer(ret, tmp.premier());
+			tmp = tmp.suivants();
+		}
+		ret = creer(ret, dernierDansFile);
+		return ret;
 	}
 	@Override
 	default FileImmutable<E> retrait() {
