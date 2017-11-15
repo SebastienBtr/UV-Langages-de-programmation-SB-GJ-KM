@@ -47,14 +47,14 @@ public class FileMutableImplementation<E> implements FileMutable<E> {
     }
 
     @Override
-    public FileMutable<E> creer() {
+    public FileMutableImplementation<E> creer() {
         FileMutableImplementation<E> ret = new FileMutableImplementation<E>();
 
         return ret;
     }
 
     @Override
-    public FileMutable<E> creerCopie() {
+    public FileMutableImplementation<E> creerCopie() {
         if(taille() == 0){
             return this.creer();
         }
@@ -70,6 +70,9 @@ public class FileMutableImplementation<E> implements FileMutable<E> {
     @Override
     public void ajouter(File<E> secondeFile) {
 
+        for(E e : secondeFile){
+            this.ajouter(e);
+        }
     }
 
     @Override

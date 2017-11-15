@@ -28,8 +28,8 @@ public class Test {
 		System.out.println(file.suivants().premier());
 
 		FileMutableImplementation<Integer> file2 = new FileMutableImplementation<Integer>();
-		file2.ajouter(3);
 		file2.ajouter(2);
+		file2.ajouter(3);
 		file2.retirer();
 		file2.ajouter(2);
 
