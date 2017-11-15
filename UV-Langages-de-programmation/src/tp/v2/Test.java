@@ -11,28 +11,32 @@ public class Test {
 		String ret = "--Test cons-- \n";
 
 
-		//Create an empty Fifo
-		ListeMutable<Integer> list = ListeMutable.cons(1,ListeMutable.vide());
-		ListeMutable<Integer> list2 = ListeMutable.cons(2,list);
-		ListeMutable<Integer> list3 = ListeMutable.cons(3,list2);
-		ListeMutable<Integer> list4 = ListeMutable.cons(4,list3);
 
-		System.out.println("---------TEST MUTABLE---------");
-		System.out.println(list4.tete());
-		System.out.println(list4.reste().tete());
-		System.out.println(list4.reste().reste().tete());
-		System.out.println(list4.reste().reste().reste().tete());
+		FileMutableImplementation<Integer> file = new FileMutableImplementation<Integer>();
 
-		ListeMutable<Integer> list5 = list4.miroir();
+		System.out.println("__________________________");
+		file.ajouter(1);
+		System.out.println("Add 1 : "+file.premier());
+		file.ajouter(3);
+		System.out.print("Add 3 : " + file.premier());
+		System.out.println(file.suivants().premier());
+		file.retirer();
+		System.out.println("Retirer : " +file.premier());
 
-		System.out.println("Expected : 1 2 3 4");
+		file.ajouter(2);
+		System.out.print("Add 2 : " + file.premier());
+		System.out.println(file.suivants().premier());
 
-		System.out.println(list5.tete());
-		System.out.println(list5.reste().tete());
-		System.out.println(list5.reste().reste().tete());
-		System.out.println(list5.reste().reste().reste().tete());
+		FileMutableImplementation<Integer> file2 = new FileMutableImplementation<Integer>();
+		file2.ajouter(3);
+		file2.ajouter(2);
+		file2.retirer();
+		file2.ajouter(2);
 
+		System.out.print("File 2 : " + file2.premier());
+		System.out.println(file2.suivants().premier());
 
+		System.out.println(file.estEgal(file2));
 	}
 
 }

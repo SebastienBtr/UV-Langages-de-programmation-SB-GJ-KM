@@ -26,7 +26,10 @@ public interface File<E> extends Iterable<E> {
 	File<E> ajout(File<E> secondeFile);
 	
 	default String representation() {
-		return this.premier() + " " + this.suivants().representation();
+		if(this.estVide())
+			return "vide";
+		else
+			return this.premier() + " " + this.suivants().representation();
 	}
 
 	default boolean estEgal(File<E> file){

@@ -66,16 +66,13 @@ public interface ListeMutable<E> extends Liste<E>{
 			public int taille(){
 				return 1 + this.reste().taille();
 			}
-			public boolean estVide(){
-				return this.reste().taille() == 0;
-			}
 
 			public Iterator<E> iterator() {
 				return new IterateurListe<E>() {
 					ListeMutable<E> list = ListeMutable.cons(t, r);
 
 					public boolean hasNext() {
-						return !list.estVide();
+						return !list.reste().estVide();
 					}
 
 					public E next() {
@@ -127,7 +124,22 @@ public interface ListeMutable<E> extends Liste<E>{
      * @return la liste vide créé
      */
 	public static <E> ListeMutable<E> vide() {
-		return new ListeMutable<E>() {};
+		return new ListeMutable<E>() {
+
+            public boolean casVide() {
+                return true;
+            }
+
+            public Iterator<E> iterator() {
+
+                return null;
+            }
+
+            public ListeMutable<E> miroir(){
+
+                return this;
+            }
+        };
 	}
 
 }

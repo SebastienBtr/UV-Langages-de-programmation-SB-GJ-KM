@@ -127,9 +127,6 @@ public interface Liste<E> extends Iterable<E> {
 			public int taille(){
 				return 1 + this.reste().taille();
 			}
-			public boolean estVide(){
-				return this.reste().taille() == 0;
-			}
 
 
 			public Iterator<E> iterator() {
@@ -137,7 +134,7 @@ public interface Liste<E> extends Iterable<E> {
 					Liste<E> list = Liste.cons(t, r);
 
 					public boolean hasNext() {
-						return !list.estVide();
+						return !list.reste().estVide();
 					}
 
 					public E next() {

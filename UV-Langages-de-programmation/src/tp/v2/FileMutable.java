@@ -8,11 +8,7 @@ public interface FileMutable<E> extends File<E> {
 	@Override
 	default FileMutable<E> suivants(){
 		FileMutable<E> copy = this.creerCopie();
-		copy.retrait();
-
-		if (copy.estVide()) {
-			return null;
-		}
+		copy = copy.retrait();
 
 		return copy;
 	}
@@ -32,13 +28,11 @@ public interface FileMutable<E> extends File<E> {
 	@Override
 	default FileMutable<E> ajout(E dernierDansFile) {
 		this.ajouter(dernierDansFile);
-
 		return this;
 	}
 	@Override
 	default FileMutable<E> retrait() {
 		this.retirer();
-
 		return this;
 	}
 
