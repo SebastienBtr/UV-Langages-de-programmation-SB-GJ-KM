@@ -2,7 +2,7 @@
 TP pour l'UV de programmation réalisé par :
 Killian Mer, Gaetan Jacquet, Sébastien Bouttier.
   
-#TP1
+# TP1
   
 ## Convention de Nommage et de Tests
 Nous avons utilisé la norme Java pour le nommage des classes, des attributs ainsi que des méthodes.
@@ -22,7 +22,7 @@ En effet, lorsqu'on appelle les méthodes pour récupérer un élément (popElem
 
 On a donc une compléxité constante.
   
-#TP2
+# TP2
   
 ## Convention de Nommage et de Tests
 
