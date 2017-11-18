@@ -95,13 +95,11 @@ public interface File<E> extends Iterable<E> {
 					ret = this.suivants().estEgal(file.suivants());
 				}
 			}
-
 		}
 		else {
 			ret = false;
 		}
 		return ret;
-	}
-	
-	
+    }
+
 }
