@@ -8,9 +8,7 @@ public interface File<K extends File<K, E>, E> extends Iterable<E>, Mesurable {
     E premier(); // Premier de la file
     K suivants(); // Ses suivants
 
-    default public boolean estVide(){
-        return this.taille() == 0;
-    }
+    public boolean estVide();
 
     /*
 	 * Fabriques

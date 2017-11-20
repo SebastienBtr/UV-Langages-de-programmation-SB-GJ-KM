@@ -8,12 +8,6 @@ public interface FileMutable<E> extends IdentifiableParIteration<FileMutable<E>,
     void ajouter(E element);
     void retirer();
 
-    default FileMutable<E> suivants() {
-        FileMutable<E> r = creerCopie();
-        r.retirer();
-        return r;
-    }
-
     /*
 	 * Fabriques
 	 */
@@ -35,6 +29,6 @@ public interface FileMutable<E> extends IdentifiableParIteration<FileMutable<E>,
     }
 
     // Complexité en O(1).
-    void ajouter(FileMutable<E> secondeFile); //facultatif
+    //void ajouter(FileMutable<E> secondeFile); //facultatif
 
 }
