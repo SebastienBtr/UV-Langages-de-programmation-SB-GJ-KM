@@ -15,6 +15,17 @@ public class EtatMutableImpl<E> implements EtatMutable<E> {
         this.taille = 0;
     }
 
+    public EtatMutableImpl(int taille, ListeMutable<E> listeTete, ListeMutable<E> listeFin) {
+        this.taille = taille;
+        if (listeTete.estVide()) {
+            ListeMutable<E> vide = listeTete;
+            listeTete = listeFin.miroir();
+            listeFin = vide;
+        }
+        this.liste = listeTete;
+        this.fin = listeFin;
+    }
+
     @Override
     public void ajouter(E element) {
 
@@ -60,12 +71,12 @@ public class EtatMutableImpl<E> implements EtatMutable<E> {
     }
 
     @Override
-    public FileMutable creer() {
-        return null;
+    public EtatMutable<E> creer() {
+        return new EtatMutableImpl<E>();
     }
 
     @Override
-    public FileMutable<E> creerCopie() {
-        return null;
+    public EtatMutable<E> creerCopie() {
+        return new EtatMutableImpl<E>(taille,liste,fin);
     }
 }

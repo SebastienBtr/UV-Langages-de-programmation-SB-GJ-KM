@@ -14,8 +14,8 @@ public interface EtatMutable<E> {
         return this.taille() == 0;
     }
 
-    default FileMutable<E> suivants() {
-        FileMutable<E> r = creerCopie();
+    default EtatMutable<E> suivants() {
+        EtatMutable<E> r = creerCopie();
         r.retirer();
         return r;
     }
@@ -30,9 +30,9 @@ public interface EtatMutable<E> {
 	 * Fabriques
 	 */
 
-    FileMutable creer();
+    EtatMutable<E> creer();
 
-    FileMutable<E> creerCopie(); // Fabrique réalisant une copie de la file
+    EtatMutable<E> creerCopie(); // Fabrique réalisant une copie de la file
 
 
 }

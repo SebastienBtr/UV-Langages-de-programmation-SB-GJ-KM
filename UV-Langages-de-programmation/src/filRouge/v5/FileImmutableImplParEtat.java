@@ -6,14 +6,20 @@ public class FileImmutableImplParEtat<E> implements FileImmutable<E> {
 
     EtatImmutable<E> etat = new EtatImmutableImpl<>();
 
+    FileImmutableImplParEtat(EtatImmutable<E> etat) {
+        this.etat = etat;
+    }
+
     @Override
     public FileImmutable<E> creer(E dernier) {
-        return null;
+        EtatImmutable<E> e = etat.creer(dernier);
+        return new FileImmutableImplParEtat<>(e);
     }
 
     @Override
     public FileImmutable<E> creer() {
-        return null;
+        EtatImmutable<E> e = etat.creer();
+        return new FileImmutableImplParEtat<>(e);
     }
 
     @Override
@@ -23,7 +29,8 @@ public class FileImmutableImplParEtat<E> implements FileImmutable<E> {
 
     @Override
     public FileImmutable<E> suivants() {
-        return etat.suivants();
+        EtatImmutable<E> e = etat.suivants();
+        return new FileImmutableImplParEtat<>(e);
     }
 
     @Override

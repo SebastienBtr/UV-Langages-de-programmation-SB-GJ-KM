@@ -6,6 +6,10 @@ public class FileMutableImplParEtat<E> implements FileMutable<E> {
 
     EtatMutable<E> etat = new EtatMutableImpl<>();
 
+    FileMutableImplParEtat(EtatMutable<E> etat) {
+        this.etat = etat;
+    }
+
     @Override
     public void ajouter(E element) {
         etat.ajouter(element);
@@ -23,7 +27,8 @@ public class FileMutableImplParEtat<E> implements FileMutable<E> {
 
     @Override
     public FileMutable<E> suivants() {
-        return etat.suivants();
+        EtatMutable<E> e = etat.suivants();
+        return new FileMutableImplParEtat<E>(e);
     }
 
     @Override
@@ -42,12 +47,14 @@ public class FileMutableImplParEtat<E> implements FileMutable<E> {
     }
 
     @Override
-    public FileMutable<E> creer() {
-        return null;
+    public FileMutableImplParEtat<E> creer() {
+        EtatMutable<E> e = etat.creer();
+        return new FileMutableImplParEtat<E>(e);
     }
 
     @Override
-    public FileMutable<E> creerCopie() {
-        return null;
+    public FileMutableImplParEtat<E> creerCopie() {
+        EtatMutable<E> e = etat.creerCopie();
+        return new FileMutableImplParEtat<E>(e);
     }
 }

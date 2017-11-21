@@ -12,7 +12,11 @@ public interface EtatImmutable<E> {
 
     int taille();
 
-    FileImmutable<E> suivants();
+    EtatImmutable<E> suivants();
 
     Iterator<E> iterator();
+
+    EtatImmutable<E> creer();
+
+    EtatImmutable<E> creer(E dernier);
 }
