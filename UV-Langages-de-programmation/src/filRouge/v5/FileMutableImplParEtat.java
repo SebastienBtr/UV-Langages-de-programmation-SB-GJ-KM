@@ -4,9 +4,13 @@ import java.util.Iterator;
 
 public class FileMutableImplParEtat<E> implements FileMutable<E> {
 
-    EtatMutable<E> etat = new EtatMutableImpl<>();
+    EtatMutable<E> etat;
 
-    FileMutableImplParEtat(EtatMutable<E> etat) {
+    public FileMutableImplParEtat() {
+        etat = new EtatMutableImpl<>();
+    }
+
+    public FileMutableImplParEtat(EtatMutable<E> etat) {
         this.etat = etat;
     }
 
