@@ -4,22 +4,26 @@ import java.util.Iterator;
 
 public class FileImmutableImplParEtat<E> implements FileImmutable<E> {
 
-    EtatImmutable<E> etat = new EtatImmutableImpl<>();
+    EtatImmutable<E> etat;
 
-    FileImmutableImplParEtat(EtatImmutable<E> etat) {
+    public FileImmutableImplParEtat() {
+        this.etat = new EtatImmutableImpl<>();
+    }
+
+    public FileImmutableImplParEtat(EtatImmutable<E> etat) {
         this.etat = etat;
     }
 
     @Override
-    public FileImmutable<E> creer(E dernier) {
+    public FileImmutableImplParEtat<E> creer(E dernier) {
         EtatImmutable<E> e = etat.creer(dernier);
-        return new FileImmutableImplParEtat<>(e);
+        return new FileImmutableImplParEtat<E>(e);
     }
 
     @Override
     public FileImmutable<E> creer() {
         EtatImmutable<E> e = etat.creer();
-        return new FileImmutableImplParEtat<>(e);
+        return new FileImmutableImplParEtat<E>(e);
     }
 
     @Override
@@ -28,9 +32,9 @@ public class FileImmutableImplParEtat<E> implements FileImmutable<E> {
     }
 
     @Override
-    public FileImmutable<E> suivants() {
+    public FileImmutableImplParEtat<E> suivants() {
         EtatImmutable<E> e = etat.suivants();
-        return new FileImmutableImplParEtat<>(e);
+        return new FileImmutableImplParEtat<E>(e);
     }
 
     @Override
