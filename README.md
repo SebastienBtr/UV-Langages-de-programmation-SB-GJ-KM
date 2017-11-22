@@ -50,3 +50,45 @@ Exemple :
  La documentation des méthodes se trouve à la racine du projet dans le répertoire javaDoc
  
  Pour executer les tests il faut se rendre dans le package que l'on veut tester puis executer les classes commemcant par "test"
+ 
+ # TP3
+  
+## Convention de Nommage et de Tests
+
+Pour le Nommage nous avons suivi celui du code existant.
+  
+Au niveau des tests nous avons repris la même structure que le TP1 et TP2.
+En effet, on utilise un compteur qui recense chaque cas de test. Le résultat nous est affiché sous la forme 5/5 (5 cas validés sur 5 essais).
+Lorsqu'il y a une erreur, un message personnalisé s'affiche afin de cibler l'erreur.
+
+Ici, nous avons rajouter les tests de performances qui permettent d'étudier la performance des méthodes en calculant leur temps d'éxécution. 
+
+Exemple : 
+
+           --TestConstructor--
+           Error : First non null 
+           Result : 2/3
+           
+ Exemple Performance : 
+
+           --TestPerformances--
+           class filRouge.v5.FileMutableImplParEtat - ajout/retrait: 44
+           class filRouge.v5.FileImmutableImplParEtat - ajout/retrait: 43
+           
+ ## Principe de conception
+   
+ Nous avons utilisé un patern Etat qui permet de séparer la couche haute d'un objet à sa couche basse.
+ Cela permet donc d'établir différents états ainsi que les méthodes qui leurs sont propres.
+   
+  Pour ce faire nous avons fait :
+  
+    - Des interfaces (EtatMutable/EtateImmutable) qui déclarent les fonctions des états (couche basse) et implémentent les fonctions par défaut;
+    - Des classes d'implémentation des états (EtatMutableImpl/EtatImmutableImpl) qui implémentent les fonctions déclarées par leur interface (présenté ci-dessus);
+    - Des classes (FileImmutableImplParEtat/FileMutableImplParEtat) qui implémentent FileMutable et FileImmutable et qui possèdent un état en attribut afin de lui déléguer les accesseurs de la classe.
+ 
+ ## Tests et performances
+ 
+ Pour executer les tests il faut se rendre dans le package que l'on veut tester puis executer les classes commemcant par "test".
+ 
+ De plus, des tests de performances on été ajoutés dans une classe de tests : TestPerformances
+ En ce qui concerne les résultats, on a observé que les resultats variaient beaucoup. Cependant, il s'avère que la file mutable par état est légérement plus performante que la file immutable par état.
