@@ -10,6 +10,7 @@ public class TestPerformances {
     private static long diviseur = 100000;
 
     public static void main(String[] args) {
+        System.out.println("--TestPerformances--");
         testPerformanceFileMutableEtatImpl();
         testPerformanceFileImmutableEtatImpl();
     }
