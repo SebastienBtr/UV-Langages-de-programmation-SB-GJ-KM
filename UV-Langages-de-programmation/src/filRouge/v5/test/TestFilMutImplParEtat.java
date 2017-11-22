@@ -47,7 +47,7 @@ public class TestFilMutImplParEtat {
                 ret += "Error : retirer() when empty\n";
             }
         }
-        
+
         //Test 4
         totalCas++;
         file.ajouter(1);
