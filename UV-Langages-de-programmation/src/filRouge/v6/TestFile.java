@@ -13,7 +13,10 @@ public class TestFile {
 
 	public static void main(String[] args) {
 		
-		FileImmutable<Integer> file = new FileImmutableAvecEtatReifie<>(new EtatEnveloppeDeuxListesImmutables<>());
+		//FileImmutable<Integer> file = new FileImmutableAvecEtatReifie<>(new EtatEnveloppeDeuxListesImmutables<>());
+
+		FileImmutable<Integer> file = new FileImmutableAvecEtatReifie<>(EtatImmutableAvecInversionParesseuse.vide());
+
 		tester(file);
 		//testerUsageLineaire(file);
 		testerUsageNonLineaire(file); // temps trop long

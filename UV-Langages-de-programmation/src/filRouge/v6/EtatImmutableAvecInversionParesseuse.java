@@ -42,7 +42,7 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
 
             @Override
             public EtatFileImmutable<E> creer(E dernier) {
-
+                System.out.println("here");
                 FileImmutable<Miroir<E>> miroir = new FileImmutableAvecEtatReifie<>(
                         new EtatEnveloppeDeuxListesImmutables<Miroir<E>>()).creer();
 
@@ -54,13 +54,13 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
         };
     }
 
-    public static <E> EtatFileImmutable<E> cons(ListeImmutable<E> debut, FileImmutable<Miroir<E>> miroir, ListeImmutable<E> fin) {
+    public static <E> EtatFileImmutable<E> cons(ListeImmutable<E> d, FileImmutable<Miroir<E>> m, ListeImmutable<E> f) {
 
         return new EtatImmutableAvecInversionParesseuse<E>() {
 
-            private ListeImmutable<E> debut;
-            private FileImmutable<Miroir<E>> miroir;
-            private ListeImmutable<E> fin;
+            private ListeImmutable<E> debut = d;
+            private FileImmutable<Miroir<E>> miroir = m;
+            private ListeImmutable<E> fin = f;
 
             @Override
             public boolean estVide() {
@@ -69,11 +69,14 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
 
             @Override
             public E premier() {
-                return this.debut.tete();
+                return debut.tete();
             }
 
             @Override
             public EtatFileImmutable<E> suivants() {
+                debut.taille();
+                miroir.taille();
+                fin.taille();
                 if((debut.taille() + miroir.taille() + fin.taille()) <= 1){
                     return vide();
                 }
