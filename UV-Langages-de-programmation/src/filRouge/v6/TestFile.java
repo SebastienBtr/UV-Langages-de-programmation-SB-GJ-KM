@@ -15,8 +15,8 @@ public class TestFile {
 		
 		FileImmutable<Integer> file = new FileImmutableAvecEtatReifie<>(new EtatEnveloppeDeuxListesImmutables<>());
 		tester(file);
-		testerUsageLineaire(file);
-		//testerUsageNonLineaire(file); // temps trop long
+		//testerUsageLineaire(file);
+		testerUsageNonLineaire(file); // temps trop long
 	}
 
 	private static <K extends File<K, Integer>> void tester(K file) {
