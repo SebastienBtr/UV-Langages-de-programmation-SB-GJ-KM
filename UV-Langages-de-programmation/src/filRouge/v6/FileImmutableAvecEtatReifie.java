@@ -51,7 +51,7 @@ public class FileImmutableAvecEtatReifie<E> implements FileImmutable<E> {
 	}
 	@Override
 	public String toString() {
-		return this.etat.representation();
+		return this.etat.toString();
 	}		
 	
 }

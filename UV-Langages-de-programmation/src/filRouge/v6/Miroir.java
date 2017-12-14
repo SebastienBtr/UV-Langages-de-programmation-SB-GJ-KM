@@ -28,13 +28,13 @@ public class Miroir<E> {
             miroir = ListeImmutable.cons(source.tete(), miroir);
             source = source.reste();
         }
-        if(source.taille() == 1) {
-            miroir = ListeImmutable.cons(source.tete(), miroir);
+        if(source.taille() > 0) {
+            miroir = this.miroir.creer(this.source.tete());
             source = source.reste();
         }
     }
 
-    public ListeImmutable<E> miroir() {
+    public ListeImmutable<E> miroir() throws UnsupportedOperationException {
 
         if (source.estVide()) {
             return miroir;

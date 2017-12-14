@@ -18,7 +18,7 @@ public class TestFile {
 		FileImmutable<Integer> file = new FileImmutableAvecEtatReifie<>(EtatImmutableAvecInversionParesseuse.vide());
 
 		tester(file);
-		//testerUsageLineaire(file);
+		testerUsageLineaire(file);
 		testerUsageNonLineaire(file); // temps trop long
 	}
 
@@ -33,17 +33,22 @@ public class TestFile {
 		System.out.println("itérateur a un suivant (false) : " + iter.hasNext());
 		file = file.ajout(11);
 		System.out.println("[11] : " + file);
-		file = file.retrait();
+        System.out.println(file.taille());
+        file = file.retrait();
 		System.out.println("[] : " + file);
-		file = file.ajout(11);
+        System.out.println(file.taille());
+        file = file.ajout(11);
 		System.out.println("[11] : " + file);
-		file = file.retrait();
+        System.out.println(file.taille());
+        file = file.retrait();
 		System.out.println("[] : " + file);
+        System.out.println(file.taille());
 
-		for (int i = 0; i < t; i++) {
-			file = file.ajout(i);
+        for (int i = 0; i < t; i++) {
+            file = file.ajout(i);
 		}
-		System.out.println("0 1 ... " + (t-1) + " : " + file);
+        System.out.println("fin for");
+        System.out.println("0 1 ... " + (t-1) + " : " + file);
 		System.out.println("taille (" + t + ") : " + file.taille());
 		System.out.println("tete 0 : " + file.premier());
 		;
@@ -61,7 +66,8 @@ public class TestFile {
 
 	@SuppressWarnings("unused")
 	private static <K extends File<K, Integer>> void testerUsageNonLineaire(K file) {
-		int t = 11180000;
+        System.out.println("usage non lineaire :");
+        int t = 1118000;
 		long time = threadBean.getCurrentThreadCpuTime();
 
 		for (int i = 0; i < t; i++) {
@@ -78,7 +84,7 @@ public class TestFile {
 
 
 	private static <K extends File<K, Integer>> void testerUsageLineaire(K file) {
-		int t = 11180000;
+		int t = 1118000;
 		long time = threadBean.getCurrentThreadCpuTime();
 
 		for (int i = 0; i < t; i++) {

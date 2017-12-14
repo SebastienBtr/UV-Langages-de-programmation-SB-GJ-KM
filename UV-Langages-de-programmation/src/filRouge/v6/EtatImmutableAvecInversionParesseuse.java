@@ -1,6 +1,5 @@
 package filRouge.v6;
 
-import filRouge.v5.EtatImmutable;
 import filRouge.v5.ListeImmutable;
 
 import java.util.Iterator;
@@ -21,6 +20,10 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
         return 0;
     }
 
+    default void invariant() {
+
+    }
+
     @Override
     EtatFileImmutable<E> creer();
 
@@ -36,13 +39,17 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
         return new EtatImmutableAvecInversionParesseuse<E>() {
 
             @Override
+            public String toString() {
+                return this.representation();
+            }
+
+            @Override
             public EtatFileImmutable<E> creer() {
                 return vide();
             }
 
             @Override
             public EtatFileImmutable<E> creer(E dernier) {
-                System.out.println("here");
                 FileImmutable<Miroir<E>> miroir = new FileImmutableAvecEtatReifie<>(
                         new EtatEnveloppeDeuxListesImmutables<Miroir<E>>()).creer();
 
@@ -56,11 +63,25 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
 
     public static <E> EtatFileImmutable<E> cons(ListeImmutable<E> d, FileImmutable<Miroir<E>> m, ListeImmutable<E> f) {
 
-        return new EtatImmutableAvecInversionParesseuse<E>() {
+        EtatImmutableAvecInversionParesseuse<E> e = new EtatImmutableAvecInversionParesseuse<E>() {
 
             private ListeImmutable<E> debut = d;
             private FileImmutable<Miroir<E>> miroir = m;
             private ListeImmutable<E> fin = f;
+
+            @Override
+            public String toString() {
+                return this.representation();
+            }
+
+            @Override
+            public int taille() {
+                int mTaille = 0;
+                for (Miroir<E> m : miroir) {
+                    mTaille += m.taille();
+                }
+                return debut.taille() + mTaille + fin.taille();
+            }
 
             @Override
             public boolean estVide() {
@@ -74,15 +95,13 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
 
             @Override
             public EtatFileImmutable<E> suivants() {
-                debut.taille();
-                miroir.taille();
-                fin.taille();
-                if((debut.taille() + miroir.taille() + fin.taille()) <= 1){
+                if((taille()) <= 1){
                     return vide();
                 }
-                else {
-                    return cons(debut.reste(), miroir, fin);
+                if (!miroir.estVide()) {
+                    miroir.premier().inverser();
                 }
+                return cons(debut.reste(), miroir, fin);
             }
 
             @Override
@@ -92,31 +111,30 @@ public interface EtatImmutableAvecInversionParesseuse<E> extends EtatFileImmutab
 
             @Override
             public EtatFileImmutable<E> creer(E dernier) {
-                invariant();
-
                 return cons(debut, miroir, fin.creer(dernier));
             }
 
-            private void invariant() {
-                if (debut.taille() <= 0) {
-                    if(miroir.taille() == 0) throw new UnsupportedOperationException();
-                    else {
+            public void invariant() {
+                if (debut.estVide()) {
+                    try {
                         debut = miroir.premier().miroir();
                         miroir = miroir.suivants();
+
+                    } catch (UnsupportedOperationException e) {
+                        e.printStackTrace();
                     }
                 }
-                if (miroir.taille() <= 0 && fin.taille() > 0) {
-                    miroir.ajout(new Miroir<E>(fin));
-                    miroir.premier().inverser();
-                    fin = ListeImmutable.vide();
-                }
-                if (fin.taille() >= debut.taille() + miroir.taille()) {
-                    miroir.ajout(new Miroir<E>(fin));
+
+                if (fin.taille() >= taille() - fin.taille() ) {
+                    miroir = miroir.ajout(new Miroir<E>(fin));
                     miroir.premier().inverser();
                     fin = ListeImmutable.vide();
                 }
             }
         };
+        e.invariant();
+        return e;
+
     }
 
 
